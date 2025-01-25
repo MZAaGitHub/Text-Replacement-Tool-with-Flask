@@ -1,0 +1,238 @@
+:root {
+    --primary-color: #4a5568;
+    --hover-color: #2d3748;
+    --border-color: #e2e8f0;
+    --bg-color: #f7fafc;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Add these styles to your existing CSS */
+
+.line-limit-controls,
+.find-controls,
+.tools-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-color);
+}
+
+.tools-controls {
+    background-color: var(--border-color);
+}
+
+.line-input,
+.find-input {
+    width: 65px;
+    padding: 6px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.find-input {
+    width: 115px;
+    text-align: left;
+}
+
+input[type=text],
+input[type=number] {
+    outline: none;
+}
+
+.line-input::-webkit-inner-spin-button,
+.line-input::-webkit-outer-spin-button {
+    opacity: 1;
+}
+
+/* Update the existing button-group style */
+.button-group {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn :active {
+    transform: scale(0.95);
+    background-color: var(--primary-color);
+}
+
+.btn:hover {
+    background-color: var(--hover-color);
+}
+
+.show-table {
+    margin-left: auto;
+    background-color: var(--primary-color);
+    /*    border: 1px solid var(--bg-color);*/
+}
+
+.show-table svg {
+    width: 16px;
+    height: 16px;
+    fill: white;
+    margin: 2px;
+}
+
+.content {
+    display: flex;
+    height: 80vh;
+    gap: 0;
+    transition: gap 0.3s ease;
+}
+
+.content.with-table {
+    gap: 20px;
+}
+
+.text-section {
+    flex: 7;
+    transition: flex 0.3s ease;
+}
+
+.text-section.fullscreen {
+    flex: 1;
+}
+
+.replace-section {
+    flex: 3;
+    transition: all 0.3s ease;
+}
+
+.replace-section.hidden {
+    flex: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+textarea {
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    resize: none;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+    outline: none;
+}
+
+.table-container {
+    height: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-color);
+    z-index: 1;
+}
+
+tbody {
+    display: block;
+    overflow-y: auto;
+    height: calc(80vh - 41px);
+}
+
+tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid var(--border-color);
+    white-space: pre-wrap;
+}
+
+th {
+    background-color: var(--bg-color);
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: whitesmoke;
+}
+
+/* Add these styles to the existing style.css file */
+
+.context-menu {
+    position: fixed;
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 4px 0;
+    min-width: 150px;
+    z-index: 1000;
+}
+
+.menu-option {
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--primary-color);
+    transition: background-color 0.2s;
+}
+
+.menu-option:hover {
+    background-color: whitesmoke;
+}
+
+.add-option {
+    color: #2196F3;
+}
+
+.delete-option {
+    color: #f44336;
+}
+
+/* Prevent text selection when using context menu */
+.table-container {
+    user-select: none;
+}
+
+/* Allow text selection in editable cells */
+.cell-editor {
+    user-select: text;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Replacement Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="button-group">
+            <div class="tools-controls">
+                <button class="btn" data-action="paste">Paste</button>
+                <button class="btn" data-action="copy">Copy</button>
+                <button class="btn" data-action="clear">Clear</button>
+                <button class="btn" data-action="download">Download</button>
+                <button class="btn" data-action="readPdf">Read PDF</button>
+                <input type="file" id="pdfInput" accept=".pdf" style="display: none;">
+                <button class="btn" data-action="replace">Replace Words</button>
+            </div>
+            <div class="line-limit-controls">
+                <input type="number" id="lineLimit" min="1" value="200" class="line-input">
+                <button class="btn" data-action="adjustLines">Adjust Lines</button>
+            </div>
+            <div class="find-controls">
+                <input type="text" id="originalText" class="find-input" placeholder="Original">
+                <input type="text" id="replacementText" class="find-input" placeholder="Replacement">
+                <button class="btn" data-action="replaceText">Replace</button>
+            </div>
+            <button class="btn show-table" data-action="toggle-table">
+                <svg class="icon table-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    data-action="toggle-table">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <svg class="icon hide-table-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    style="display: none;" data-action="toggle-table">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="content">
+            <div class="text-section fullscreen">
+                <textarea id="mainText" spellcheck="false" placeholder="Type your text here..."></textarea>
+            </div>
+
+            <div class="replace-section hidden">
+                <div class="table-container">
+                    <table id="replacementTable">
+                        <thead>
+                            <tr>
+                                <th>Original</th>
+                                <th>Replace</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/text-operations.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/table.js') }}"></script>
+</body>
+
+</html>
