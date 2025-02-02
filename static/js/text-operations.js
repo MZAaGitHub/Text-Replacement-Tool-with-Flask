@@ -87,7 +87,7 @@ class TextOperations {
         return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 
-    'toggle-table'() {
+    toggleTable() {
         const content = document.querySelector('.content');
         const textSection = document.querySelector('.text-section');
         const replaceSection = document.querySelector('.replace-section');
