@@ -64,13 +64,17 @@ class TextOperations {
     async replace() {
         const replacements = await TableManager.fetchReplacements();
         let text = this.textarea.value;
-
+        this.textarea.value = text
+            .replace(/ "/g, ' “').replace(/\n"/g, '\n“')
+            .replace(/" /g, '” ').replace(/"\n/g, '”\n')
+            .replace(/"/g, '”');
+        
         replacements.forEach(({ original, replacement }) => {
             const regex = new RegExp(this.escapeRegExp(original), 'g');
             text = text.replace(regex, replacement);
         });
 
-        this.textarea.value = text.trim();
+        this.clearLineTwoSpacing(text);
     }
 
     async replaceText() {
@@ -146,15 +150,11 @@ class TextOperations {
             return;
         }
 
-        let word_replace = [
-            ["“", "\n\n“"],
-            ["”", "”\n\n"],
-        ];
-
-        for (let [old_word, new_word] of word_replace) {
-            const regex = new RegExp(this.escapeRegExp(old_word), 'g');
-            this.textarea.value = this.textarea.value.replace(regex, new_word);
-        }
+        this.textarea.value = this.textarea.value
+            .replace(/ "/g, ' “').replace(/\n"/g, '\n“')
+            .replace(/" /g, '” ').replace(/"\n/g, '”\n')
+            .replace(/"/g, '”').replace(/“/g, '\n“')
+            .replace(/”/g, '”\n');
 
         const lines = this.textarea.value.split('\n');
         const adjustedLines = [];
@@ -196,18 +196,13 @@ class TextOperations {
             adjustedLines.push(currentLine);
         }
 
-        this.textarea.value = adjustedLines.join('\n');
+        this.clearLineTwoSpacing(adjustedLines.join('\n'))
+    }
 
-        let line_replace = [
-            ["\n\n\n", "\n"],
-            ["\n\n", "\n"],
-            ["\n", "\n\n"],
-        ];
-
-        for (let [old_word, new_word] of line_replace) {
-            const regex = new RegExp(this.escapeRegExp(old_word), 'g');
-            this.textarea.value = this.textarea.value.replace(regex, new_word);
-        }
+    clearLineTwoSpacing(text) {
+        text = text.replace(/\n\n/g, '\n\n\n').replace(/\n/g, '\n\n').trim();
+        text = text.split('\n').map(line => line.trim()).join('\n\n');
+        this.textarea.value = text.replace(/\n\n\n+/g, '\n\n').trim();
     }
 
 }
