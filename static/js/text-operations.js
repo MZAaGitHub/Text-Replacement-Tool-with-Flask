@@ -72,7 +72,7 @@ class TextOperations {
     async replace() {
         const replacements = await TableManager.fetchReplacements();
         let text = this.textarea.value;
-        this.textarea.value = text
+        text = text
             .replace(/ "/g, ' “').replace(/\n"/g, '\n“')
             .replace(/" /g, '” ').replace(/"\n/g, '”\n')
             .replace(/"/g, '”');
