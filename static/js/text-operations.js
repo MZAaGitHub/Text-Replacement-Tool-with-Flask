@@ -48,7 +48,15 @@ class TextOperations {
 
         const firstLine = text.split('\n')[0].trim();
         const fileName = firstLine.slice(0, 50);
-        const safeFileName = fileName.replace(/[<>:"/\\|?*\x00-\x1F]/g, '');
+        
+        const safeFileName = fileName.replace(
+            /(\d+-\d+)|([^\d<>\-:"\/\\|?*\x00-\x1F]+)|(-(?=[^\d\s]))/g,
+            (match, p1, p2, p3) => {
+                if (p1) return p1;
+                if (p3) return '';
+                return match;
+            }
+        );
 
         const blob = new Blob([text], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
